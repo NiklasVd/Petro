@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Petro", "Petro\Petro.csproj", "{10490015-5311-4CF7-B434-6C78D5CAB5E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Petro.Crypto", "Petro.Crypto\Petro.Crypto.csproj", "{D6426233-4FC7-4D89-8097-655A9A448EC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Petro.Net", "Petro.Net\Petro.Net.csproj", "{2EF93208-A42D-4DB3-A095-683EBAB0E331}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10490015-5311-4CF7-B434-6C78D5CAB5E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10490015-5311-4CF7-B434-6C78D5CAB5E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10490015-5311-4CF7-B434-6C78D5CAB5E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10490015-5311-4CF7-B434-6C78D5CAB5E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6426233-4FC7-4D89-8097-655A9A448EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6426233-4FC7-4D89-8097-655A9A448EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6426233-4FC7-4D89-8097-655A9A448EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6426233-4FC7-4D89-8097-655A9A448EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EF93208-A42D-4DB3-A095-683EBAB0E331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EF93208-A42D-4DB3-A095-683EBAB0E331}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EF93208-A42D-4DB3-A095-683EBAB0E331}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EF93208-A42D-4DB3-A095-683EBAB0E331}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
