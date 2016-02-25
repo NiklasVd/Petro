@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Caseomatic.Net">
-      <HintPath>..\..\Reaction\VS projects\Reaction.Core\Binaries\Debug\Caseomatic.Net.dll</HintPath>
+      <HintPath>..\Dependencies\Caseomatic.Net.dll</HintPath>
     </Reference>
     <Reference Include="NetSerializer">
-      <HintPath>..\..\Reaction\VS projects\Reaction.Core\Binaries\Debug\NetSerializer.dll</HintPath>
+      <HintPath>..\Dependencies\NetSerializer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

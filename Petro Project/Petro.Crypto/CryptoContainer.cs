@@ -14,6 +14,11 @@ namespace Petro.Crypto
             get { return items[itemId]; }
         }
 
+        public CryptoContainer()
+        {
+            items = new Dictionary<string, CryptoItem>();
+        }
+
         public void Add(CryptoItem item)
         {
             items.Add(item.ID, item);

@@ -8,6 +8,8 @@ namespace Petro
 {
     public interface IPetroContainer<T>
     {
+        T this[string itemId] { get; }
+
         void Add(T item);
         void Remove(string itemId);
         void Remove(T item);
