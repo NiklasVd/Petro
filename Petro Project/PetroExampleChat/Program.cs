@@ -19,9 +19,12 @@ namespace PetroExampleChat
             Application.SetCompatibleTextRenderingDefault(false);
 
             var mainForm = new MainForm();
+            mainForm.FormClosing += OnFormClosing;
+
             Application.Run(mainForm);
 
-            mainForm.FormClosing += OnFormClosing;
+            Debug.LogInformation($"Petro Example Chat\nBy Case-o-Matic\n\nUsing Petro Version {Properties.Resources.Version}");
+            EvaluateCommandArgs();
         }
 
         private static void EvaluateCommandArgs()
@@ -29,11 +32,14 @@ namespace PetroExampleChat
             var commandArgs = Environment.GetCommandLineArgs();
             foreach (var commandArg in commandArgs)
             {
+                if (commandArg.Contains(@"C:\"))
+                    continue; // Standard startup parameter can be ignored
+
                 switch (commandArg)
                 {
-                    case "-DeactivateLogging":
-                        Debug.ActiveLogging = false;
-                        Console.WriteLine("Deactivated active logging. Exceptions and errors are still logged with the initial startup information.");
+                    case "-ActivateLogging":
+                        Debug.ActiveLogging = true;
+                        Console.WriteLine("Activated active logging. Exceptions and errors are logged with the initial startup information wether or not this property is active.");
                         break;
 
                     case "-ActivateTelemetry":

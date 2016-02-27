@@ -27,6 +27,8 @@ namespace Petro.Net
             this.myself = myself;
 
             client = new Client<CryptoClientPacket, CryptoServerPacket>(port);
+            client.CommunicationModule = new CryptoCommunicationModule();
+            
             client.OnReceivePacket += OnReceivePacket;
             client.OnConnectionLost += OnConnectionLost;
         }

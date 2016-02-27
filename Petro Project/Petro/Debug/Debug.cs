@@ -33,7 +33,6 @@ namespace Petro.Debug
 
         static Debug()
         {
-            activeLogging = true;
             logMessages = new List<LogMessage>();
         }
 
