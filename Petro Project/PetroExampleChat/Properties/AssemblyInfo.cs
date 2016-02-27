@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Petro.Crypto")]
+[assembly: AssemblyTitle("PetroExampleChat")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Case-o-Matic")]
-[assembly: AssemblyProduct("Petro.Crypto")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("PetroExampleChat")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d6426233-4fc7-4d89-8097-655a9a448ec6")]
+[assembly: Guid("15a7fc91-2ddc-4cc5-aee0-d48e39c55c53")]
 
 // Version information for an assembly consists of the following four values:
 //

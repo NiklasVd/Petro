@@ -9,6 +9,7 @@ namespace Petro.Crypto
     public class CryptoContainer : IPetroContainer<CryptoItem>
     {
         private readonly Dictionary<string, CryptoItem> items;
+
         public CryptoItem this[string itemId]
         {
             get { return items[itemId]; }

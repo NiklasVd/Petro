@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,26 +14,26 @@ namespace Petro.Crypto
     {
         private static readonly BinaryFormatter binFormatter = new BinaryFormatter();
 
+        private string id;
         public string ID
         {
-            get;
-            private set;
+            get { return id; }
+            private set { id = value; }
         }
 
+        private byte[] data;
         public byte[] Data
         {
-            get;
-            private set;
+            get { return data; }
+            private set { data = value; }
         }
 
-        public CryptoItem(string id, byte[] data)
+        public CryptoItem(string id)
         {
-            ID = id;
-            Data = data;
+            this.id = id;
         }
-        public CryptoItem(string id, object dataObj)
+        public CryptoItem(string id, object dataObj) : this(id)
         {
-            ID = id;
             Encrypt(dataObj);
         }
 
@@ -46,7 +47,7 @@ namespace Petro.Crypto
             using (var mStream = new MemoryStream())
             {
                 binFormatter.Serialize(mStream, dataObject);
-                Data = mStream.ToArray();
+                data = mStream.ToArray();
             }
         }
     }
