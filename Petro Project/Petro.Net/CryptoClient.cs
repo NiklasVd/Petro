@@ -22,12 +22,18 @@ namespace Petro.Net
             get { return isConnected; }
         }
 
+        public bool ActiveConnectionRepair
+        {
+            get { return client.ActiveConnectionRepair; }
+            //set { client.ActiveConnectionRepair = value; }
+        }
+
         public CryptoClient(Participant myself, int port)
         {
             this.myself = myself;
 
             client = new Client<CryptoClientPacket, CryptoServerPacket>(port);
-            client.CommunicationModule = new CryptoCommunicationModule();
+            client.CommunicationModule = new CryptoCommunicationModule<CryptoServerPacket, CryptoClientPacket>();
             
             client.OnReceivePacket += OnReceivePacket;
             client.OnConnectionLost += OnConnectionLost;
@@ -35,35 +41,29 @@ namespace Petro.Net
 
         public void Connect(IPEndPoint endPoint)
         {
-            communicationId = CommunicationID.Generate(myself);
-            var answerHandshakePacket = SendCryptoRequest<HandshakeCryptoClientPacket, AnswerHandshakeCryptoServerPacket>
-                (new HandshakeCryptoClientPacket(myself, communicationId));
-
-            ProcessAnswerHandshakePacket(answerHandshakePacket);
+            if (!isConnected)
+            {
+                communicationId = CommunicationID.Generate(myself);
+                SendCryptoPacket(new HandshakeCryptoClientPacket(myself, communicationId));
+            }
         }
 
         public void Disconnect()
         {
-            SendCryptoPacket(new DisconnectCryptoClientPacket());
-            DisconnectClient();
-        }
-
-        public void SendRequest() // TODO: Implement request
-        {
-            var answerRequestPacket = SendCryptoRequest<RequestCryptoClientPacket, AnswerRequestCryptoServerPacket>
-                (new RequestCryptoClientPacket());
+            if (isConnected)
+            {
+                SendCryptoPacket(new DisconnectCryptoClientPacket());
+                DisconnectClient();
+            }
         }
 
         private void SendCryptoPacket(CryptoClientPacket packet)
         {
-            packet.Sign(communicationId);
-            client.SendPacket(packet);
-        }
-        private TServerAnswer SendCryptoRequest<TClientRequest, TServerAnswer>(TClientRequest packet)
-            where TClientRequest : CryptoClientPacket, IPacketRequestable where TServerAnswer : CryptoServerPacket
-        {
-            packet.Sign(communicationId);
-            return client.SendRequest<TClientRequest, TServerAnswer>(packet);
+            if (isConnected)
+            {
+                packet.Sign(communicationId);
+                client.SendPacket(packet);
+            }
         }
 
         private void DisconnectClient()
@@ -78,6 +78,7 @@ namespace Petro.Net
             {
                 case AnswerHandshakeCryptoServerPacket.HandshakeStatus.Success:
                     isConnected = true;
+                    serverCommunicationId = packet.SenderCommunicationID;
                     break;
 
                 case AnswerHandshakeCryptoServerPacket.HandshakeStatus.Failure:
@@ -86,13 +87,25 @@ namespace Petro.Net
             }
         }
 
-        private void ProcessAbortPacket(AbortCryptoServerPacket packet)
+        private void ProcessAbortPacket(AbortConnectionCryptoServerPacket packet)
         {
             DisconnectClient();
         }
 
         private void OnReceivePacket(CryptoServerPacket packet)
         {
+            switch (packet.Type)
+            {
+                case CryptoServerPacketType.AnswerHandshake:
+                    ProcessAnswerHandshakePacket((AnswerHandshakeCryptoServerPacket)packet);
+                    break;
+
+                case CryptoServerPacketType.AbortConnection:
+                    DisconnectClient();
+                    break;
+                case CryptoServerPacketType.AnswerRequest:
+                    break;
+            }
         }
 
         private void OnConnectionLost()

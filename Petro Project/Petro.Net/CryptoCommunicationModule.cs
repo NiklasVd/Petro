@@ -9,18 +9,20 @@ using System.Threading.Tasks;
 
 namespace Petro.Net
 {
-    public class CryptoCommunicationModule : ICommunicationModule
+    public class CryptoCommunicationModule<TReceivePacket, TSendPacket>
+        : ICommunicationModule<TReceivePacket, TSendPacket>
+        where TReceivePacket : CryptoPacket where TSendPacket : CryptoPacket
     {
         private static readonly BinaryFormatter binFormatter = new BinaryFormatter();
         private static CryptoClientPacketType[] compressedClientPacketTypes = { CryptoClientPacketType.Request };
         private static CryptoServerPacketType[] compressedServerPacketTypes = { CryptoServerPacketType.AnswerRequest };
 
-        public T ConvertReceive<T>(byte[] bytes) where T : IPacket
+        public TReceivePacket ConvertReceive(byte[] bytes)
         {
-            return PacketConverter.ToFlexPacket<T>(bytes);
+            return PacketConverter.ToFlexPacket<TReceivePacket>(bytes);
         }
 
-        public byte[] ConvertSend<T>(T packet) where T : IPacket
+        public byte[] ConvertSend(TSendPacket packet)
         {
             return PacketConverter.ToFlexBytes(packet, false, true);
         }

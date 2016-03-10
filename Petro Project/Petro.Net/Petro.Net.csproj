@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CryptoClient.cs" />
     <Compile Include="CryptoCommunicationModule.cs" />
+    <Compile Include="CryptoServer.cs" />
     <Compile Include="Packet\Crypto Packet Enums.cs" />
     <Compile Include="Packet\Crypto Packet Base.cs" />
     <Compile Include="Packet\Crypto Client Packets.cs" />

@@ -32,7 +32,7 @@ namespace Petro.Net
     }
 
     [Serializable]
-    public class AbortCryptoServerPacket : CryptoServerPacket
+    public class AbortConnectionCryptoServerPacket : CryptoServerPacket
     {
         public AbortReason Reason
         {
@@ -42,7 +42,7 @@ namespace Petro.Net
             }
         }
 
-        public AbortCryptoServerPacket(AbortReason reason) : base(CryptoServerPacketType.Abort)
+        public AbortConnectionCryptoServerPacket(AbortReason reason) : base(CryptoServerPacketType.AbortConnection)
         {
             container.Add(new CryptoItem("Reason", reason));
         }

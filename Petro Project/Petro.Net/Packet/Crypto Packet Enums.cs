@@ -18,7 +18,7 @@ namespace Petro.Net
     public enum CryptoServerPacketType : byte
     {
         AnswerHandshake,
-        Abort,
+        AbortConnection,
         AnswerRequest
     }
 }
